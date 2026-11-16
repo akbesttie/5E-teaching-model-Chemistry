@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5E Химия 9</title>
+<style>
+:root{--bg:#f6f9f9;--ink:#112a3a;--muted:#4d6573;--line:#d3e0e3;--card:#fff;--c:#2d7dd2;
+--e1:#e4572e;--e2:#f2a900;--e3:#2fa66a;--e4:#2d7dd2;--e5:#7a4fc4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI",Roboto,Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 10px}
+h4{margin:0 0 8px;font-size:16px}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.top{position:sticky;top:0;z-index:10;background:rgba(246,249,249,.96);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;align-items:center;padding-top:10px;padding-bottom:10px}
+.brand{font-weight:800;font-size:19px;text-decoration:none}
+.top nav{display:flex;gap:18px;font-size:15px}
+.top nav a{text-decoration:none;color:var(--muted)}
+.top nav a:hover{color:var(--ink);text-decoration:underline}
+.hero{padding:52px 0 20px}
+.hero h1{font-size:clamp(32px,6vw,56px);max-width:14ch}
+.hero p{max-width:60ch;color:var(--muted);margin:0}
+.route{display:flex;align-items:center;margin:30px 0 4px;max-width:620px}
+.route i{flex:1;height:4px;background:var(--line)}
+.route b{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:18px;flex:none}
+section{padding:36px 0 6px}
+section h2{font-size:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.tcard{display:block;background:var(--card);border:1px solid var(--line);border-top:6px solid var(--e4);border-radius:10px;padding:16px 18px;text-decoration:none}
+a.tcard:hover{box-shadow:0 0 0 3px var(--line)}
+a.tcard:focus-visible,.btn:focus-visible,.shead:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.tcard h3{font-size:20px}
+.tcard p{margin:0 0 10px;color:var(--muted);font-size:15px}
+.tcard.off{border-top-color:var(--line);opacity:.65}
+.mini{display:flex;gap:5px;margin-top:6px}
+.mini span{width:14px;height:14px;border-radius:50%}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.step{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:10px;padding:12px 14px}
+.step b{display:block;font-size:17px}
+.step span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.step em{display:block;font-style:normal;font-size:15px;margin-top:6px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;max-width:640px}
+.fact p{margin:0 0 10px}
+.btn{font:inherit;font-weight:600;background:var(--ink);color:#fff;border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+.btn:disabled{background:#9db0b8;cursor:not-allowed}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--ink)}
+footer{margin-top:50px;border-top:1px solid var(--line);padding:20px 0 36px;color:var(--muted);font-size:14px}
+.back{display:inline-block;margin:22px 0 6px;color:var(--muted)}
+.thead h1{font-size:clamp(28px,5vw,44px)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.box ul{margin:0;padding-left:20px}
+.pbar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 2px}
+.pbar i{display:block;height:100%;width:0;background:var(--e3);transition:width .4s}
+.pt{font-size:14px;color:var(--muted);margin:0 0 22px}
+.stage{position:relative;padding:0 0 22px 66px}
+.stage:before{content:"";position:absolute;left:23px;top:52px;bottom:2px;width:4px;background:var(--line)}
+.stage:last-child:before{display:none}
+.dot{position:absolute;left:0;top:0;width:50px;height:50px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:700 22px Georgia,serif}
+.stage.locked .dot{background:#aebdc3}
+.shead{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:2px 0;cursor:pointer}
+.shead b{display:block;font-size:20px}
+.shead small{display:block;color:var(--muted);font-size:14px}
+.stage.locked .shead{cursor:not-allowed;color:var(--muted)}
+.sbody{display:none;margin-top:10px;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:10px;padding:16px 18px}
+.stage.open .sbody{display:block}
+.crit{background:#eef5f6;border-radius:8px;padding:8px 14px;margin:0 0 14px;font-size:15px}
+.crit b{display:block;margin-bottom:2px}
+.crit ul{margin:0;padding-left:20px}
+.task{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}
+.qrow{margin:0 0 10px}
+.qrow p{margin:0 0 4px}
+select,input[type=text],textarea{font:inherit;max-width:100%;padding:6px 8px;border:1px solid #9db0b8;border-radius:6px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:64px}
+.fb{font-size:14px;font-weight:600}
+.fb.ok,.res.ok{color:#1c7a47}
+.fb.bad,.res.bad{color:#b3361a}
+.res{margin:8px 0 0;font-weight:600}
+.scr{font:700 26px Georgia,serif;letter-spacing:.04em;margin:0 0 10px}
+.spoon{height:18px;background:#b8c4c9;border-radius:9px;position:relative;overflow:hidden;max-width:420px;margin:10px 0}
+.spoon i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#e4572e,#f2a900);transition:width 3.5s linear}
+.spoon.hot i{width:100%}
+canvas{display:block;width:100%;max-width:640px;background:#fbfdfd;border:1px solid var(--line);border-radius:10px}
+.cloze{line-height:2.2}
+.formula{font:700 20px Georgia,serif;background:#eef5f6;border-radius:8px;padding:10px 14px;margin:10px 0}
+.next{margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hint{font-size:14px;color:var(--muted)}
+.final{background:#e8f6ee;border:1px solid #9fd5b6;border-radius:10px;padding:14px 18px;margin-top:10px;font-weight:600}
+.hide{display:none}
+@media (max-width:720px){.steps{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stage{padding-left:58px}.dot{width:44px;height:44px;font-size:19px}.stage:before{left:20px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pbar i,.spoon i{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="#home">5E Химия 9</a>
+<nav><a href="#topics">Тақырыптар</a><a href="#way">5E жолы</a></nav>
+</div></header>
+
+<main class="wrap">
+<div id="home">
+<div class="hero">
+<h1>Зерттей отырып үйрен</h1>
+<p>9-сынып химиясы, 2-тоқсан. Әр тақырып — бес кезеңнен тұратын жол. Бір кезеңді өткенде ғана келесісі ашылады.</p>
+<div class="route" id="route"></div>
+</div>
+<section id="topics"><h2>Тақырыптар</h2><div class="grid" id="tgrid"></div></section>
+<section id="way"><h2>5E жолы</h2><div class="steps" id="steps"></div></section>
+<section><h2>Білесің бе?</h2>
+<div class="fact"><p id="fact"></p><button class="btn ghost" type="button" id="factbtn">Тағы бір факт</button></div></section>
+</div>
+
+<div id="topic" class="hide">
+<a class="back" href="#topics">← Барлық тақырыптар</a>
+<div class="thead"><h1 id="ttitle"></h1></div>
+<div class="two">
+<div class="box"><h4>Оқу мақсаттары</h4><ul id="goals"></ul></div>
+<div class="box"><h4>Күтілетін нәтижелер (бағалау критерийлері)</h4><ul id="outs"></ul></div>
+</div>
+<div class="pbar"><i id="pfill"></i></div>
+<p class="pt" id="ptext"></p>
+<div id="journey"></div>
+<div id="finalbox"></div>
+</div>
+</main>
+
+<footer><div class="wrap">5E Химия 9</div></footer>
+<noscript><p style="padding:20px">Бұл сайт жұмыс істеуі үшін JavaScript қосулы болуы керек.</p></noscript>
+
+<script>
+(function () {
+"use strict";
+
+var COLORS = ["#e4572e", "#f2a900", "#2fa66a", "#2d7dd2", "#7a4fc4"];
+var CAT = ["Металдық", "Иондық", "Коваленттік", "Үшеуіне де ортақ"];
+var TF = ["Дұрыс", "Бұрыс"];
+
+var TOPICS = [
+  { id: "metal", t: "Металдық байланыс", d: "9.1.3.4 · 9.1.3.5", open: true },
+  { id: "", t: "Иондық байланыс", d: "Жақында" },
+  { id: "", t: "Коваленттік байланыс", d: "Жақында" },
+  { id: "", t: "Кристалдық торлар", d: "Жақында" }
+];
+
+var STEPS = [
+  ["Engage", "Қызықтыру", "Бұл не? Неге?"],
+  ["Explore", "Зерттеу", "Өзім байқап көрейін"],
+  ["Explain", "Түсіндіру", "Енді түсіндім"],
+  ["Elaborate", "Тереңдету", "Жаңа жағдайда қолданамын"],
+  ["Evaluate", "Бағалау", "Қаншалықты меңгердім?"]
+];
+
+var FACTS = [
+  "Сынап — бөлме температурасында сұйық күйде болатын жалғыз металл.",
+  "Галлий қолдың жылуынан балқиды: оның балқу температурасы шамамен 30 °C.",
+  "Күміс — электр тогын ең жақсы өткізетін металдардың бірі.",
+  "Металдардың жылтыры мен иілгіштігі — олардың ішкі құрылымының нәтижесі."
+];
+
+var LESSON = {
+  id: "metal",
+  title: "Металдық байланыс",
+  goals: [
+    "9.1.3.4 металдық байланыстың түзілуін түсіндіру",
+    "9.1.3.5 металдық байланысты иондық және коваленттік байланыстармен салыстыру"
+  ],
+  outcomes: [
+    "металдық байланыстың түзілуін түсіндіреді",
+    "металдық байланыс негізінде металдардың негізгі қасиеттерін талқылайды",
+    "металдық байланысты, иондық және коваленттік байланыстармен салыстырады"
+  ],
+  stages: [
+    {
+      desc: "Тақырыпты тап, сұрақтарға ойлан",
+      crit: ["Металдарға тән ортақ қасиетті анықтайсың", "Металдардың электр өткізгіштігін түсіндіресің", "Металдардың жылу өткізгіштігін анықтайсың"],
+      blocks: [
+        { t: "p", x: "Әріптері араласып кеткен сөзді дұрыс жазып, бүгінгі тақырыпты тап." },
+        { t: "anagram", given: "Мдлеытқа йылсабна", ans: "металдық байланыс" },
+        { t: "p", x: "Қасықты ыстық суға салып көр. Не байқайсың?" },
+        { t: "spoon" },
+        { t: "list", x: ["Металдан жасалған заттардың барлығына ортақ қандай қасиет тән?", "Неліктен металдар жылуды жақсы өткізеді?", "Неліктен металдар электр тогын өткізеді?"] },
+        { t: "reflect", items: ["Өз болжамыңды жаз"] }
+      ]
+    },
+    {
+      desc: "Металдың ішкі құрылымын зертте",
+      crit: ["Металдың ішкі құрылымын сипаттайсың", "Зарядталған бөлшектерді ажыратасың", "Электрондардың қозғалысын түсіндіресің", "Бос орындарды дұрыс толтырасың"],
+      blocks: [
+        { t: "p", x: "Төмендегі модельде металдың ішкі құрылымы көрсетілген. Электр өрісін қосып, электрондар қалай қозғалатынын бақыла." },
+        { t: "model" },
+        { t: "quiz", title: "Зерттеу сұрақтары", items: [
+          { q: "Суретте қандай бөлшектер бейнеленген?", o: ["Металл катиондары және еркін электрондар", "Тек молекулалар", "Анион мен катион"], a: 0 },
+          { q: "Қай бөлшектер оң зарядталған?", o: ["Электрондар", "Металл катиондары", "Нейтрондар"], a: 1 },
+          { q: "Металдағы электрондар қайда қозғала алады?", o: ["Бір атомның жанында ғана", "Бүкіл металл бойымен", "Тек беткі қабатта"], a: 1 },
+          { q: "Оң және теріс зарядталған бөлшектер бір-бірін ___.", o: ["тебеді", "тартады"], a: 1 }
+        ] }
+      ]
+    },
+    {
+      desc: "Түсініктемені оқы",
+      crit: ["Металдың ішкі құрылымын және металдық байланыстың түзілуін түсінесің", "Байланыстың металл қасиеттеріне әсерін түсінесің"],
+      blocks: [
+        { t: "cards", items: [
+          { h: "Металдық байланыс дегеніміз не?", x: "Металл кристалдарындағы оң зарядталған металл иондары мен еркін қозғалатын бос электрондар арасындағы тартылыстан түзілетін байланыс. Ол таза металдар мен олардың құймаларына тән." },
+          { h: "Қалай түзіледі?", x: "Металл атомдары валенттік электрондарын береді, ал бұл электрондар барлық атомдарға ортақ болады. 2-топ металында әр атом екі валенттік электронын ортақ пайдалануға береді." },
+          { h: "Қасиеттерге әсері", x: "Бос электрондар электр және жылу өткізгіштікті қамтамасыз етеді. Иілімділік, созылғыштық, жылтыр сияқты қасиеттер де металдық кристалдық тордың ерекшеліктерімен түсіндіріледі." }
+        ] },
+        { t: "formula", x: "Me → Meⁿ⁺ + ne⁻" },
+        { t: "link", href: "https://twig-bilim.kz/kz/film/metallic-bonding", x: "Бейнекөрініс: «Металдық байланыс»" },
+        { t: "ack", x: "Түсіндім" }
+      ]
+    },
+    {
+      desc: "Білімді жаңа тапсырмаларда қолдан",
+      crit: ["Тұжырымдардың дұрыстығын анықтайсың", "Бұрыс тұжырымдарды түзетесің", "Байланыс түрлерінің ерекшеліктерін салыстырасың"],
+      blocks: [
+        { t: "quiz", title: "1-тапсырма. Дұрыс немесе бұрыс", items: [
+          { q: "Металдық байланыс оң металл иондары мен еркін электрондардың тартылысынан түзіледі.", o: TF, a: 0 },
+          { q: "Иондық байланыс кезінде атомдар ортақ электрон жұбын түзеді.", o: TF, a: 1 },
+          { q: "Металл атомдары электрондарын бергенде теріс зарядқа ие болады.", o: TF, a: 1 },
+          { q: "Коваленттік байланыс атомдар арасында ортақ электрон жұбының түзілуі арқылы жүреді.", o: TF, a: 0 },
+          { q: "Металдық байланыс атомдар арасында ортақ электрон жұбының түзілуі арқылы жүреді.", o: TF, a: 1 }
+        ] },
+        { t: "reflect", items: ["Бұрыс тұжырымдарды өз сөзіңмен дұрыстап жаз"] },
+        { t: "quiz", title: "2-тапсырма. Байланыстарды салыстыр", items: [
+          { q: "Бос (делокализацияланған) электрондар болады.", o: CAT, a: 0 },
+          { q: "Электрон бір атомнан екіншісіне толық беріледі (Na → Na⁺, Cl → Cl⁻).", o: CAT, a: 1 },
+          { q: "Атомдар ортақ электрон жұбын түзеді.", o: CAT, a: 2 },
+          { q: "Қатты күйінде электр тогын өткізеді.", o: CAT, a: 0 },
+          { q: "Байланыс түзуге валенттік электрондар қатысады.", o: CAT, a: 3 }
+        ] },
+        { t: "cloze", title: "3-тапсырма. Мәтінді толықтыр (өзін-өзі бағала)",
+          parts: ["Металл атомдарының сыртқы қабатында ", 0, ", ", 1, " немесе ", 2, " электрон болады. Бұл ", 3, " оңай бөлініп, атомдар ", 4, " зарядталған ", 5, " иондарына айналады. Босаған электрондар бүкіл кристалл бойымен қозғалады, сондықтан оларды ", 6, " электрондар деп атайды. Электр өрісінде олар бағытталған қозғалысқа түседі: электр тогы — электрондар ", 7, "."],
+          ans: ["#", "#", "#", "электрондар", "оң", "металл", "делокализацияланған", "ағыны"],
+          bank: ["ағыны", "бір", "делокализацияланған", "екі", "металл", "молекулалар", "оң", "теріс", "үш", "электрондар"] },
+        { t: "quiz", title: "4-тапсырма. Жағдаят", items: [
+          { q: "Балғамен соққанда мыс сым иіледі, ал тұз кристалы үгітіледі. Неліктен?", o: ["Металда катиондар қабаттары электрондар арасында жылжиды, тартылыс сақталады. Иондық кристалда қабаттар жылжығанда бірдей зарядты иондар қатар келіп, тебіледі", "Металл атомдары тұз иондарынан үлкен болғандықтан", "Тұз суда ерігендіктен"], a: 0 }
+        ] }
+      ]
+    },
+    {
+      desc: "Өзіңді баға, рефлексия жаса",
+      crit: ["Өзіңді дескриптор бойынша бағалайсың", "Сабақ туралы өз ойыңды білдіресің"],
+      blocks: [
+        { t: "selfcheck", title: "Өзін-өзі бағалау: мен ...", items: ["металдық байланыстың түзілуін түсіндіре аламын", "металдардың қасиеттерін металдық байланыспен байланыстыра аламын", "металдық байланысты иондық және коваленттік байланыстармен салыстыра аламын"] },
+        { t: "reflect", items: ["Нені білдім?", "Не қиын болды?", "Нені тағы білгім келеді?"] }
+      ]
+    }
+  ]
+};
+
+function el(tag, cls, txt) {
+  var e = document.createElement(tag);
+  if (cls) { e.className = cls; }
+  if (txt !== undefined) { e.textContent = txt; }
+  return e;
+}
+function loadP() {
+  try { return JSON.parse(localStorage.getItem("5e-chem9")) || {}; } catch (e) { return {}; }
+}
+function saveP(o) {
+  try { localStorage.setItem("5e-chem9", JSON.stringify(o)); } catch (e) { /* ignore */ }
+}
+
+function buildHome() {
+  var route = document.getElementById("route");
+  COLORS.forEach(function (c, i) {
+    var b = el("b", null, STEPS[i][0].charAt(0));
+    b.style.background = c;
+    route.appendChild(b);
+    if (i < COLORS.length - 1) { route.appendChild(el("i")); }
+  });
+
+  var grid = document.getElementById("tgrid");
+  TOPICS.forEach(function (tp) {
+    var card = tp.open ? el("a", "tcard") : el("div", "tcard off");
+    if (tp.open) { card.href = "#" + tp.id; }
+    card.appendChild(el("h3", null, tp.t));
+    card.appendChild(el("p", null, tp.d));
+    var mini = el("div", "mini");
+    COLORS.forEach(function (c) { var s = el("span"); s.style.background = c; mini.appendChild(s); });
+    card.appendChild(mini);
+    grid.appendChild(card);
+  });
+
+  var steps = document.getElementById("steps");
+  STEPS.forEach(function (s, i) {
+    var d = el("div", "step");
+    d.style.setProperty("--c", COLORS[i]);
+    d.appendChild(el("b", null, s[0]));
+    d.appendChild(el("span", null, s[1]));
+    d.appendChild(el("em", null, s[2]));
+    steps.appendChild(d);
+  });
+
+  var fi = 0;
+  var fact = document.getElementById("fact");
+  fact.textContent = FACTS[0];
+  document.getElementById("factbtn").addEventListener("click", function () {
+    fi = (fi + 1) % FACTS.length;
+    fact.textContent = FACTS[fi];
+  });
+}
+
+function makeBlocks(score) {
+  return {
+    p: function (c, b) { c.appendChild(el("p", null, b.x)); },
+    list: function (c, b) {
+      var u = el("ul");
+      b.x.forEach(function (s) { u.appendChild(el("li", null, s)); });
+      c.appendChild(u);
+    },
+    formula: function (c, b) { c.appendChild(el("div", "formula", b.x)); },
+    link: function (c, b) {
+      var p = el("p");
+      var a = el("a", null, b.x);
+      a.href = b.href; a.target = "_blank"; a.rel = "noopener";
+      p.appendChild(a);
+      c.appendChild(p);
+    },
+    cards: function (c, b) {
+      b.items.forEach(function (it) {
+        var bx = el("div", "box");
+        bx.style.marginBottom = "10px";
+        bx.appendChild(el("h4", null, it.h));
+        var tx = el("p", null, it.x);
+        tx.style.margin = "0";
+        bx.appendChild(tx);
+        c.appendChild(bx);
+      });
+    },
+    ack: function (c, b, g) {
+      var btn = el("button", "btn", b.x);
+      btn.type = "button";
+      btn.addEventListener("click", function () { btn.disabled = true; btn.textContent = "Ескерілді"; g(); });
+      c.appendChild(btn);
+    },
+    reflect: function (c, b) {
+      b.items.forEach(function (q) {
+        var w = el("div", "task");
+        w.appendChild(el("h4", null, q));
+        var t = el("textarea");
+        t.setAttribute("aria-label", q);
+        w.appendChild(t);
+        c.appendChild(w);
+      });
+    },
+    selfcheck: function (c, b) {
+      var w = el("div", "task");
+      w.appendChild(el("h4", null, b.title));
+      b.items.forEach(function (s) {
+        var lab = el("label");
+        lab.style.display = "block";
+        var cb = el("input");
+        cb.type = "checkbox";
+        lab.appendChild(cb);
+        lab.appendChild(document.createTextNode(" " + s));
+        w.appendChild(lab);
+      });
+      c.appendChild(w);
+    },
+    spoon: function (c) {
+      var bar = el("div", "spoon");
+      bar.appendChild(el("i"));
+      var btn = el("button", "btn ghost", "Қасықты ыстық суға салу");
+      btn.type = "button";
+      btn.addEventListener("click", function () { bar.classList.toggle("hot"); });
+      c.appendChild(bar);
+      c.appendChild(btn);
+    },
+    anagram: function (c, b, g) {
+      var w = el("div", "task");
+      w.appendChild(el("div", "scr", b.given));
+      var inp = el("input");
+      inp.type = "text";
+      inp.placeholder = "Тақырыпты жаз";
+      inp.setAttribute("aria-label", "Тақырып");
+      var btn = el("button", "btn", "Тексеру");
+      btn.type = "button";
+      btn.style.marginLeft = "8px";
+      var msg = el("p", "res");
+      function check() {
+        var v = inp.value.trim().toLowerCase().replace(/\s+/g, " ");
+        if (v === b.ans) {
+          msg.textContent = "Дұрыс! Бүгінгі тақырып — Металдық байланыс.";
+          msg.className = "res ok";
+          inp.disabled = true; btn.disabled = true;
+          g();
+        } else {
+          msg.textContent = "Әзірге дұрыс емес. Әріптерді қайта орналастырып көр.";
+          msg.className = "res bad";
+        }
+      }
+      btn.addEventListener("click", check);
+      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { check(); } });
+      w.appendChild(inp); w.appendChild(btn); w.appendChild(msg);
+      c.appendChild(w);
+    },
+    model: function (c) {
+      var cv = document.createElement("canvas");
+      cv.width = 640; cv.height = 300;
+      cv.setAttribute("role", "img");
+      cv.setAttribute("aria-label", "Металдың ішкі құрылымы: катиондар және бос электрондар");
+      var ctx = cv.getContext("2d");
+      var ions = [], els = [], field = false, j, i;
+      for (j = 0; j < 4; j++) { for (i = 0; i < 8; i++) { ions.push([45 + i * 70 + (j % 2) * 35, 45 + j * 70]); } }
+      for (i = 0; i < 30; i++) {
+        els.push({ x: Math.random() * 640, y: Math.random() * 300, vx: (Math.random() - 0.5) * 1.6, vy: (Math.random() - 0.5) * 1.6 });
+      }
+      function draw() {
+        ctx.clearRect(0, 0, 640, 300);
+        ctx.font = "bold 18px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ions.forEach(function (p) {
+          ctx.beginPath(); ctx.arc(p[0], p[1], 17, 0, 6.2832);
+          ctx.fillStyle = "#2d7dd2"; ctx.fill();
+          ctx.fillStyle = "#fff"; ctx.fillText("+", p[0], p[1] + 1);
+        });
+        els.forEach(function (e) {
+          ctx.beginPath(); ctx.arc(e.x, e.y, 4.5, 0, 6.2832);
+          ctx.fillStyle = "#f2a900"; ctx.fill();
+        });
+      }
+      function step() {
+        els.forEach(function (e) {
+          e.vx += (Math.random() - 0.5) * 0.3; e.vy += (Math.random() - 0.5) * 0.3;
+          e.vx = Math.max(-1.5, Math.min(1.5, e.vx)); e.vy = Math.max(-1.5, Math.min(1.5, e.vy));
+          e.x += e.vx + (field ? 2 : 0); e.y += e.vy;
+          if (e.x > 640) { e.x = 0; }
+          if (e.x < 0) { e.x = 640; }
+          if (e.y > 300 || e.y < 0) { e.vy = -e.vy; e.y = Math.max(0, Math.min(300, e.y)); }
+        });
+        draw();
+        if (document.body.contains(cv)) { requestAnimationFrame(step); }
+      }
+      draw();
+      var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!still) { requestAnimationFrame(step); }
+      var lab = el("label");
+      lab.style.display = "block";
+      lab.style.margin = "8px 0";
+      var cb = el("input");
+      cb.type = "checkbox";
+      cb.addEventListener("change", function () { field = cb.checked; });
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(" Электр өрісін қосу (батарея)"));
+      c.appendChild(cv);
+      c.appendChild(lab);
+      c.appendChild(el("p", "hint", "Көк шеңбер — металл катионы (+), сары нүкте — бос электрон."));
+    },
+    quiz: function (c, b, g) {
+      var w = el("div", "task");
+      if (b.title) { w.appendChild(el("h4", null, b.title)); }
+      var rows = [];
+      b.items.forEach(function (it, n) {
+        var row = el("div", "qrow");
+        row.appendChild(el("p", null, (n + 1) + ". " + it.q));
+        var s = el("select");
+        s.setAttribute("aria-label", "Жауап " + (n + 1));
+        s.appendChild(new Option("Таңда…", ""));
+        it.o.forEach(function (t, k) { s.appendChild(new Option(t, String(k))); });
+        var fb = el("div", "fb");
+        row.appendChild(s); row.appendChild(fb);
+        w.appendChild(row);
+        rows.push({ s: s, fb: fb, it: it });
+      });
+      var btn = el("button", "btn", "Тексеру");
+      btn.type = "button";
+      var res = el("p", "res");
+      btn.addEventListener("click", function () {
+        var ok = 0, i;
+        for (i = 0; i < rows.length; i++) {
+          if (rows[i].s.value === "") { res.textContent = "Барлық сұрақтарға жауап таңда."; res.className = "res bad"; return; }
+        }
+        rows.forEach(function (r) {
+          var good = Number(r.s.value) === r.it.a;
+          if (good) { ok++; }
+          r.s.disabled = true;
+          r.fb.className = "fb " + (good ? "ok" : "bad");
+          r.fb.textContent = good ? "Дұрыс" : "Дұрыс жауап: " + r.it.o[r.it.a];
+        });
+        score.ok += ok; score.total += rows.length;
+        res.className = "res";
+        res.textContent = "Нәтиже: " + ok + " / " + rows.length;
+        btn.disabled = true;
+        g();
+      });
+      w.appendChild(btn); w.appendChild(res);
+      c.appendChild(w);
+    },
+    cloze: function (c, b, g) {
+      var w = el("div", "task");
+      if (b.title) { w.appendChild(el("h4", null, b.title)); }
+      var box = el("p", "cloze");
+      var sels = [];
+      b.parts.forEach(function (p) {
+        if (typeof p === "string") { box.appendChild(document.createTextNode(p)); return; }
+        var s = el("select");
+        s.setAttribute("aria-label", "Бос орын " + (p + 1));
+        s.appendChild(new Option("…", ""));
+        b.bank.forEach(function (t) { s.appendChild(new Option(t, t)); });
+        box.appendChild(document.createTextNode("(" + (p + 1) + ") "));
+        box.appendChild(s);
+        sels.push(s);
+      });
+      w.appendChild(box);
+      var btn = el("button", "btn", "Тексеру");
+      btn.type = "button";
+      var res = el("p", "res");
+      btn.addEventListener("click", function () {
+        var ok = 0, i, empty = false;
+        for (i = 0; i < sels.length; i++) { if (sels[i].value === "") { empty = true; } }
+        if (empty) { res.textContent = "Барлық бос орындарды толтыр."; res.className = "res bad"; return; }
+        for (i = 0; i < sels.length; i++) {
+          var a = b.ans[i], v = sels[i].value;
+          var good = (a === "#") ? (["бір", "екі", "үш"].indexOf(v) > -1) : (a === v);
+          if (good) { ok++; }
+          sels[i].disabled = true;
+        }
+        score.ok += ok; score.total += sels.length;
+        res.className = "res";
+        res.textContent = "Нәтиже: " + ok + " / " + sels.length + ". Дұрыс сөздер: бір, екі, үш, электрондар, оң, металл, делокализацияланған, ағыны.";
+        btn.disabled = true;
+        g();
+      });
+      w.appendChild(btn); w.appendChild(res);
+      c.appendChild(w);
+    }
+  };
+}
+
+function buildJourney(L) {
+  var root = document.getElementById("journey");
+  root.innerHTML = "";
+  document.getElementById("finalbox").innerHTML = "";
+  document.getElementById("ttitle").textContent = L.title;
+  var gl = document.getElementById("goals"), ol = document.getElementById("outs");
+  gl.innerHTML = ""; ol.innerHTML = "";
+  L.goals.forEach(function (s) { gl.appendChild(el("li", null, s)); });
+  L.outcomes.forEach(function (s) { ol.appendChild(el("li", null, s)); });
+
+  var prog = loadP();
+  var reached = Number(prog[L.id]) || 0;
+  var n = L.stages.length;
+  var score = { ok: 0, total: 0 };
+  var B = makeBlocks(score);
+  var arts = [], dots = [];
+
+  function refresh(openIdx) {
+    arts.forEach(function (a, i) {
+      a.classList.remove("locked", "open");
+      if (i > reached) { a.classList.add("locked"); }
+      if (i === openIdx) { a.classList.add("open"); }
+      a.querySelector(".shead").disabled = (i > reached);
+      dots[i].textContent = (i < reached) ? "✓" : STEPS[i][0].charAt(0);
+    });
+    document.getElementById("pfill").style.width = Math.round(Math.min(reached, n) / n * 100) + "%";
+    document.getElementById("ptext").textContent = reached >= n ? "Жол аяқталды" : "Кезең " + (reached + 1) + " / " + n;
+  }
+
+  L.stages.forEach(function (st, i) {
+    var art = el("article", "stage");
+    art.style.setProperty("--c", COLORS[i]);
+    var dot = el("span", "dot", STEPS[i][0].charAt(0));
+    var head = el("button", "shead");
+    head.type = "button";
+    head.appendChild(el("b", null, STEPS[i][0] + " — " + STEPS[i][1]));
+    head.appendChild(el("small", null, st.desc));
+    var body = el("div", "sbody");
+
+    var crit = el("div", "crit");
+    crit.appendChild(el("b", null, "Бұл кезеңде сен:"));
+    var cu = el("ul");
+    st.crit.forEach(function (s) { cu.appendChild(el("li", null, s)); });
+    crit.appendChild(cu);
+    body.appendChild(crit);
+
+    var pending = 0;
+    var next = el("button", "btn", i === n - 1 ? "Жолды аяқтау" : "Келесі кезеңге өту");
+    next.type = "button";
+    var hint = el("span", "hint", "Алдымен тапсырмаларды орында");
+    function update() {
+      var locked = pending > 0 && i === reached;
+      next.disabled = locked;
+      hint.style.display = locked ? "inline" : "none";
+    }
+    function gate() {
+      if (i < reached) { return function () {}; }
+      pending++;
+      var done = false;
+      return function () { if (!done) { done = true; pending--; update(); } };
+    }
+    st.blocks.forEach(function (b) { B[b.t](body, b, gate()); });
+
+    var nx = el("div", "next");
+    nx.appendChild(next); nx.appendChild(hint);
+    body.appendChild(nx);
+    update();
+
+    next.addEventListener("click", function () {
+      if (i !== reached) {
+        if (arts[i + 1]) { refresh(i + 1); arts[i + 1].scrollIntoView(); }
+        return;
+      }
+      reached = i + 1;
+      prog[L.id] = reached;
+      saveP(prog);
+      if (i === n - 1) {
+        refresh(-1);
+        var f = el("div", "final");
+        f.textContent = "Жол аяқталды! Тексерілген тапсырмалар: " + score.ok + " / " + score.total + ".";
+        document.getElementById("finalbox").appendChild(f);
+        f.scrollIntoView();
+      } else {
+        refresh(i + 1);
+        arts[i + 1].scrollIntoView();
+      }
+    });
+
+    head.addEventListener("click", function () {
+      if (i > reached) { return; }
+      art.classList.toggle("open");
+    });
+
+    art.appendChild(dot); art.appendChild(head); art.appendChild(body);
+    root.appendChild(art);
+    arts.push(art); dots.push(dot);
+  });
+  refresh(Math.min(reached, n - 1));
+}
+
+function route() {
+  var h = location.hash.replace("#", "");
+  var home = document.getElementById("home"), topic = document.getElementById("topic");
+  if (h === "metal") {
+    home.classList.add("hide"); topic.classList.remove("hide");
+    buildJourney(LESSON);
+    window.scrollTo(0, 0);
+  } else {
+    topic.classList.add("hide"); home.classList.remove("hide");
+    var t = h ? document.getElementById(h) : null;
+    if (t) { t.scrollIntoView(); } else { window.scrollTo(0, 0); }
+  }
+}
+
+buildHome();
+window.addEventListener("hashchange", route);
+route();
+})();
+</script>
+</body>
+</html>
